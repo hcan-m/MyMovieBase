@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h2>Result</h2>
+
+<style>
+input[type=text] {
+  width: 170px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: white;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;
+}
+</style>
+
+<form action="{{ url_for('result') }}" method="get">
+    <br>
+
+    <label>Search by: &nbsp&nbsp</label>
+        <input type="radio" name="by_select" value="name" checked> Movie&nbsp&nbsp&nbsp
+        <input type="radio" name="by_select" value="director"> Director&nbsp&nbsp&nbsp
+        <input type="radio" name="by_select" value="actors"> Actors&nbsp&nbsp&nbsp
+        <input type="radio" name="by_select" value="genres"> Genres&nbsp&nbsp&nbsp
+<br>
+    <br>
+        <input minlength=1 type="text" name="search_value" placeholder="Search..."  required><br>
+    <br>
+      <input type="submit" value="Search" class="btn btn-outline-dark" >
+</form>
+    <br>
+
+<form action="{{ url_for('create') }}" method="get">
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th></th>
+        <th>Movie</th>
+        <th>Director</th>
+        <th>Duration</th>
+        <th>Year</th>
+        <th>Actors</th>
+        <th>Genres</th>
+        <th>IMDb</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in result %}
+        <tr>
+            <td><input type="checkbox" name="ids" value='{{ item[0] }}'></td>
+            <td>{{ item[1] }} </td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3] }} min.</td>
+            <td>{{ item[4] }}</td>
+            <td>{{ item[5] }}</td>
+            <td>{{ item[6] }}</td>
+            <td><a href= {{ item[8] }}>{{ item[7] }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>
+    <button type="submit" name= "action" value= "1" class="btn btn-outline-dark">Add to Watch List</button>
+    <button type="submit" name = "action" value="2" class="btn btn-outline-dark">Add to Watched List</button>
+</form>
+
+{% endblock %}

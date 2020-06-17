@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<head>
+    <title>Choose a Table to View</title>
+</head>
+    <body>
+        <form action="{{ url_for('mylists') }}" method="get">
+            <button type="submit" name= "action" value= "1">Watch List</button>
+            <button type="submit" name = "action" value="2">Watched List</button>
+        </form>
+    </body>
+</html>
+
+{% endblock %}

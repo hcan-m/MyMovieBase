@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<style>
+input[type=text] {
+  width: 170px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: white;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+
+input[type=text]:focus {
+  width: 100%;
+}
+select[]
+{
+  width: 170px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: white;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+</style>
+<form action="{{ url_for('result') }}" method="get">
+    <h2>Find your movie</h2>
+    <br>
+
+    <label>Search by: &nbsp&nbsp</label>
+        <input type="radio" name="by_select" value="name" checked> Movie&nbsp&nbsp&nbsp
+        <input type="radio" name="by_select" value="director"> Director&nbsp&nbsp&nbsp
+        <input type="radio" name="by_select" value="actors"> Actors&nbsp&nbsp&nbsp
+        <input type="radio" name="by_select" value="genres"> Genres&nbsp&nbsp&nbsp
+<br>
+    <br>
+        <input minlength=1 type="text" name="search_value" placeholder="Search..."  required><br>
+    <br>
+      <input type="submit" value="Search" class="btn btn-outline-dark" >
+</form>
+    <br>
+    <br>
+    <h4><p>{{ errormessage }}</p></h4>
+
+{% endblock %}

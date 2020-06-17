@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    </head>
+    <body>
+    <h2>My Lists</h2>
+    <br>
+    </body>
+
+<h4><p>{{ message }}</p></h4>
+
+{% if action == 1 %}
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="/login/mylists?action=1">Watch List</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/login/mylists?action=2">Watched List</a>
+  </li>
+</ul>
+{% endif %}
+
+{% if action == 2 %}
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" href="/login/mylists?action=1">Watch List</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="/login/mylists?action=2">Watched List</a>
+  </li>
+</ul>
+{% endif %}
+
+
+    <form id="1" action="{{ url_for('towatched') }}" method="get">
+
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th></th>
+                    <th>Movie</th>
+                    <th>Director</th>
+                    <th>Duration</th>
+                    <th>Year</th>
+                    <th>Actors</th>
+                    <th>Genres</th>
+                    <th>IMDb</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in mylist %}
+                    <tr>
+                        <td><input type="checkbox" name="ids" value='{{ item[0] }}'></td>
+                        <td>{{ item[1] }} </td>
+                        <td>{{ item[2] }}</td>
+                        <td>{{ item[3] }} min.</td>
+                        <td>{{ item[4] }}</td>
+                        <td>{{ item[5] }}</td>
+                        <td>{{ item[6] }}</td>
+                        <td><a href= {{ item[8] }}>{{ item[7] }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+
+            {% if action == 1 %}
+                <a>
+                    <button id="1" type="submit" class="btn btn-outline-dark">Add to Watched List</button>
+                </a>
+            {% endif %}
+        <button id="2" type="submit" formaction="/remove" class="btn btn-outline-dark">Remove from list</button>
+        <input type="hidden" name='action' value='{{ action }}'>
+    </form>
+    </html>
+{% endblock %}
